@@ -92,10 +92,12 @@
   [field]
   (if (empty? field)
     (fn [m])
-    (let [parse (field-parser field)
-          compiled (compile-switch parse)]
-      (fn [m]
-        (let [applied (map (partial apply-context m) compiled)]
-          (if (expression? applied)
-            (second applied)
-            (apply str applied)))))))
+    (let [parse (field-parser field)]
+      (if (parse/failure? parse)
+        (fn [m] field)
+        (let [compiled (compile-switch parse)]
+          (fn [m]
+            (let [applied (map (partial apply-context m) compiled)]
+              (if (expression? applied)
+                (second applied)
+                (apply str applied)))))))))

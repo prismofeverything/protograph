@@ -1,4 +1,4 @@
-(defproject protograph "0.0.22"
+(defproject protograph "0.0.23"
   :description "tranform a stream of messages into a graph"
   :url "http://github.com/prismofeverything/protograph"
   :license {:name "Eclipse Public License"
